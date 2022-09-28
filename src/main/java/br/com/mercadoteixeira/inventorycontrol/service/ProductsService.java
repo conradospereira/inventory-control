@@ -1,6 +1,8 @@
 package br.com.mercadoteixeira.inventorycontrol.service;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +41,20 @@ public class ProductsService {
         repository.save(products);
 
         return modelMapper.map(products, ProductsDto.class);
+    }
+
+    public ProductsDto updateProducts(Long id, ProductsDto dto) {
+        Products products = modelMapper.map(dto, Products.class);
+        products.setId(id);
+        products = repository.save(products);
+        return modelMapper.map(products, ProductsDto.class);
+    }
+
+    public void deleteProduct(Long id) {
+        repository.deleteById(id);
+    }
+
+    public ProductsDto updatedProducts(@NotNull Long id, @Valid ProductsDto dto) {
+        return null;
     }
 }
