@@ -29,13 +29,17 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Positive
-    private BigDecimal price;
-
     @NotBlank
     @Size(max = 50)
     private String description;
+
+    @NotBlank
+    @Size(max = 13)
+    private BigDecimal code;
+
+    @NotNull
+    @Positive
+    private BigDecimal price;
 
     @NotNull
     private String amount;
