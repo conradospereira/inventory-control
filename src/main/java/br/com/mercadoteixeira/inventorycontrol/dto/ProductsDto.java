@@ -9,7 +9,8 @@ import lombok.Setter;
 @Setter
 public class ProductsDto {
     private Long id;
-    private BigDecimal price;
     private String description;
+    private BigDecimal code;
+    private BigDecimal price;
     private String amount;
 }
