@@ -33,8 +33,8 @@ public class Products {
     @Size(max = 50)
     private String description;
 
-    @NotBlank
-    @Size(max = 13)
+    @NotNull
+    @Positive
     private BigDecimal code;
 
     @NotNull
