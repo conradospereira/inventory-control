@@ -24,7 +24,7 @@ import br.com.mercadoteixeira.inventorycontrol.dto.ProductsDto;
 import br.com.mercadoteixeira.inventorycontrol.service.ProductsService;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductsController {
     
     @Autowired
@@ -35,7 +35,7 @@ public class ProductsController {
         return service.getAll(pagination);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/products/{id}")
     public ResponseEntity<ProductsDto> detail(@PathVariable @NotNull Long id) {
         ProductsDto dto = service.getById(id);
 
@@ -45,18 +45,18 @@ public class ProductsController {
     @PostMapping
     public ResponseEntity<ProductsDto> register(@RequestBody @Valid ProductsDto dto, UriComponentsBuilder uriBuilder) {
         ProductsDto products = service.registerProduct(dto);
-        URI addres = uriBuilder.path("/products/{id}").buildAndExpand(products.getId()).toUri();
+        URI addres = uriBuilder.path("api/products/{id}").buildAndExpand(products.getId()).toUri();
 
         return ResponseEntity.created(addres).body(products);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/api/products/{id}")
     public ResponseEntity<ProductsDto> update(@PathVariable @NotNull Long id, @RequestBody @Valid ProductsDto dto) {
         ProductsDto updated = service.updatedProducts(id, dto);
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/products/{id}")
     public ResponseEntity<ProductsDto> remove(@PathVariable @NotNull Long id) {
         service.deleteProduct(id);
         return ResponseEntity.noContent().build();
