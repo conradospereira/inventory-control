@@ -1,14 +1,12 @@
 package br.com.mercadoteixeira.inventorycontrol.controller;
 
 import java.net.URI;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.mercadoteixeira.inventorycontrol.dto.ProductsDto;
+import br.com.mercadoteixeira.inventorycontrol.model.Products;
 import br.com.mercadoteixeira.inventorycontrol.service.ProductsService;
 
 @RestController
@@ -31,8 +30,8 @@ public class ProductsController {
     private ProductsService service;
 
     @GetMapping
-    public Page<ProductsDto> list(@PageableDefault(size = 10) Pageable pagination) {
-        return service.getAll(pagination);
+    public List<Products> findAll() {
+        return service.findAll();
     }
 
     @GetMapping("/api/products/{id}")

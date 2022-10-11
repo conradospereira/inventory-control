@@ -1,13 +1,14 @@
 package br.com.mercadoteixeira.inventorycontrol.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.mercadoteixeira.inventorycontrol.dto.ProductsDto;
@@ -23,10 +24,10 @@ public class ProductsService {
     @Autowired
     private ModelMapper modelMapper;
 
-    public Page<ProductsDto> getAll(Pageable pagination) {
+    public List<Products> findAll() {
         return repository
-                .findAll(pagination)
-                .map(p -> modelMapper.map(p, ProductsDto.class));
+                .findAll().stream()
+                .collect(Collectors.toList());
     }
 
     public ProductsDto getById(Long id) {
