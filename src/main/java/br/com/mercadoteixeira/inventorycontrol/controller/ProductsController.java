@@ -34,28 +34,27 @@ public class ProductsController {
         return service.findAll();
     }
 
-    @GetMapping("/api/products/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProductsDto> detail(@PathVariable @NotNull Long id) {
         ProductsDto dto = service.getById(id);
-
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping
     public ResponseEntity<ProductsDto> register(@RequestBody @Valid ProductsDto dto, UriComponentsBuilder uriBuilder) {
         ProductsDto products = service.registerProduct(dto);
-        URI addres = uriBuilder.path("api/products/{id}").buildAndExpand(products.getId()).toUri();
+        URI addres = uriBuilder.path("/{id}").buildAndExpand(products.getId()).toUri();
 
         return ResponseEntity.created(addres).body(products);
     }
 
-    @PutMapping("/api/products/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<ProductsDto> update(@PathVariable @NotNull Long id, @RequestBody @Valid ProductsDto dto) {
-        ProductsDto updated = service.updatedProducts(id, dto);
+        ProductsDto updated = service.updateProducts(id, dto);
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/api/products/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ProductsDto> remove(@PathVariable @NotNull Long id) {
         service.deleteProduct(id);
         return ResponseEntity.noContent().build();
