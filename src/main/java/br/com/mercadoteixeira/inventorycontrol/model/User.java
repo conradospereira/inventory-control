@@ -1,31 +1,20 @@
 package br.com.mercadoteixeira.inventorycontrol.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Table;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
+@Getter
+@Setter
+public class User {
 
-@Table(name = "user")
-@DiscriminatorValue("user")
-@AllArgsConstructor
-@NoArgsConstructor
-public class User implements Serializable {
+    @Id
+    @GeneratedValue
+    private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "password", nullable = false)
+    private String login;
     private String password;
-
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
-
-    @Column(name = "lastname", nullable = false)
-    private String lastname;
-
-    @Column(name = "email", nullable = false, unique = true)
-    private String email;
 }
